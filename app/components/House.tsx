@@ -15,7 +15,8 @@ export default function House({ id }: HouseProps) {
     {
       id: id,
       height: 70,
-      colour: '#62ac98'
+      colour: '#62ac98',
+      windows: 6
     }
   )
 
@@ -27,7 +28,8 @@ export default function House({ id }: HouseProps) {
       const emptyHouse = {
         id: id,
         height: 70,
-        colour: '#62ac98'
+        colour: '#62ac98',
+        windows: 6
       }
 
       Cookies.set(id, JSON.stringify(emptyHouse), { expires: 365 })
@@ -46,6 +48,13 @@ export default function House({ id }: HouseProps) {
   const handleColourChange = (newValue: string) => {
     const prev = details;
     const newDetails = {...prev, colour: newValue}
+    setDetails(newDetails)
+    Cookies.set(id, JSON.stringify(newDetails), { expires: 365 })
+  }
+
+  const handleWindowChange = (newValue: number) => {
+    const prev = details;
+    const newDetails = {...prev, windows: newValue}
     setDetails(newDetails)
     Cookies.set(id, JSON.stringify(newDetails), { expires: 365 })
   }
@@ -72,8 +81,13 @@ export default function House({ id }: HouseProps) {
           backgroundColor: details.colour
         }}
       >
-        <WindowGrid amount={6}/>
-        <Edit details={details} setHeight={handleHeightChange} setColour={handleColourChange} />
+        <WindowGrid amount={details.windows}/>
+        <Edit 
+          details={details} 
+          setHeight={handleHeightChange} 
+          setColour={handleColourChange} 
+          setWindow={handleWindowChange}
+        />
       </div>
     </div>
   )

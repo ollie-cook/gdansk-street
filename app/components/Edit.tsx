@@ -12,6 +12,7 @@ interface EditProps {
   details: House;
   setHeight: (newValue: number) => void;
   setColour: (newValue: string) => void;
+  setWindow: (newValue: number) => void;
 }
 
 export default function Edit(props: EditProps) {
@@ -24,7 +25,9 @@ export default function Edit(props: EditProps) {
         <form className="flex flex-col ">
           <ColourPicker details={props.details} setColour={props.setColour} />
           <label>Height</label>
-          <Slider defaultValue={[33]} max={100} step={1} onValueChange={newValue => props.setHeight(newValue[0])}/>
+          <Slider defaultValue={[props.details.height]} max={100} step={1} onValueChange={newValue => props.setHeight(newValue[0])}/>
+          <label>Windows</label>
+          <Slider defaultValue={[props.details.windows]} min={3} max={9} step={1} onValueChange={newValue => props.setWindow(newValue[0])}/>
         </form>
       </PopoverContent>
     </Popover>
