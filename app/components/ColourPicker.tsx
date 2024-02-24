@@ -1,9 +1,12 @@
-'use client'
-
-import { useState } from "react";
 import { CompactPicker } from 'react-color';
 import { IoIosColorPalette } from "react-icons/io";
 import { type House } from "@/app/utils/types"
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 interface ColourPickerProps {
   details: House;
@@ -11,24 +14,23 @@ interface ColourPickerProps {
 }
 
 export default function ColourPicker(props: ColourPickerProps) {
-  const [isOpen, setIsOpen] = useState(false)
-
   const updateColour = (colour: any, event: any) => {
     event.preventDefault()
     props.setColour(colour.hex)
   }
 
   return (
-    <div className="relative h-6">
-      <button onClick={(e) => {e.preventDefault(); setIsOpen(!isOpen);}}><IoIosColorPalette className="h-6 w-6"/></button>
-      {
-        isOpen == true && 
+    <Popover>
+      <PopoverTrigger className="">
+        <IoIosColorPalette className="h-6 w-6"/>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 pr-0 w-fit">
         <CompactPicker 
           color={ props.details.colour }
           onChangeComplete={ updateColour }
-          className="absolute top-2 right-1/2 translate-x-1/2 bg-white border border-gray-300 z-10" 
+          className="" 
         />
-      }
-      </div>
+      </PopoverContent>
+    </Popover>
   )
 }

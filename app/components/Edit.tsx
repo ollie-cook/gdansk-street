@@ -20,14 +20,12 @@ export default function Edit(props: EditProps) {
       <PopoverTrigger className="absolute bottom-4 right-4">
         <FaEdit className="h-6 w-6" />
       </PopoverTrigger>
-      <PopoverContent>
-        <form>
+      <PopoverContent align="end">
+        <form className="flex flex-col ">
           <ColourPicker details={props.details} setColour={props.setColour} />
           <label>Height</label>
           <Slider defaultValue={[33]} max={100} step={1} onValueChange={newValue => props.setHeight(newValue[0])}/>
-
         </form>
-        
       </PopoverContent>
     </Popover>
   )
