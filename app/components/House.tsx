@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { type House } from '@/app/utils/types'
 import Cookies from 'js-cookie'
 import Edit from './Edit'
+import WindowGrid from './WindowGrid'
 
 interface HouseProps {
   id: string;
@@ -65,12 +66,13 @@ export default function House({ id }: HouseProps) {
 
       </div>
       <div 
-        className="w-full relative"
+        className="w-full relative flex justify-center items-center"
         style={{
           height: `${details.height}%`,
           backgroundColor: details.colour
         }}
       >
+        <WindowGrid amount={6}/>
         <Edit details={details} setHeight={handleHeightChange} setColour={handleColourChange} />
       </div>
     </div>
